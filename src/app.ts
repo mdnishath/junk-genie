@@ -2,7 +2,12 @@ import express, { NextFunction, Request, Response } from 'express';
 import { notFound } from './app/libs/notFound';
 import { globalErrorHandler } from './app/libs/globalErrorHandler';
 import router from './app/routes';
+import cors from 'cors';
 const app = express();
+
+//parse
+app.use(express.json());
+app.use(cors());
 
 app.get('/api/v1', (req: Request, res: Response, next: NextFunction) => {
   try {
