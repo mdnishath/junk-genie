@@ -16,7 +16,7 @@ const addressSchema = new Schema<IAddress>({
 
 const loaderSchema = new Schema<ILoader>(
   {
-    usernames: { type: String, required: true },
+    username: { type: String, required: true, unique: true },
     user: {
       type: Schema.Types.ObjectId,
       required: [true, 'User id is required'],

@@ -36,6 +36,13 @@ const createUser = async (
   }
 };
 
+//get loaders
+const getLoaders = async (): Promise<ILoader[] | null> => {
+  const result = await Loader.find({}).populate('user');
+  return result;
+};
+
 export const LoaderServices = {
   createUser,
+  getLoaders,
 };

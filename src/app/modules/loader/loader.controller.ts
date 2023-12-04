@@ -21,6 +21,17 @@ const createUser = catchAsync(async (req, res) => {
   });
 });
 
+// get all loaders
+const getLoaders = catchAsync(async (req, res) => {
+  //call user service
+  const data = await LoaderServices.getLoaders();
+  res.status(httpStatus.OK).json({
+    success: true,
+    message: 'Users feched successfully',
+    data,
+  });
+});
 export const LoaderControllers = {
   createUser,
+  getLoaders,
 };

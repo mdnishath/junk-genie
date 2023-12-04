@@ -5,5 +5,6 @@ declare namespace NodeJS {
     DB_LOCAL_URL: string;
     NODE_ENV: string;
     DEFAULT_PASSWORD: string;
+    BYCRYPT_SOLT: number;
   };
 }

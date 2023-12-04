@@ -13,7 +13,7 @@ export interface IAddress {
   country: string;
 }
 export interface ILoader {
-  usernames: string;
+  username: string;
   user: Types.ObjectId;
   email: string;
   phone: string;

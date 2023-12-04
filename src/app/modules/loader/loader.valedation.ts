@@ -14,7 +14,7 @@ const addressValedationSchema = z.object({
 });
 
 const createLoaderValedationSchemaSchema = z.object({
-  usernames: z.string(),
+  username: z.string(),
   email: z.string(),
   phone: z.string(),
   name: nameValedationSchema,
@@ -25,7 +25,7 @@ const createLoaderValedationSchemaSchema = z.object({
 });
 
 const updateLoaderValedationSchemaSchema = z.object({
-  usernames: z.string().optional(),
+  username: z.string().optional(),
   email: z.string().optional(),
   phone: z.string().optional(),
   name: nameValedationSchema.optional(),
