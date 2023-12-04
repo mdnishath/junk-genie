@@ -1,8 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { notFound } from './app/libs/notFound';
 import { globalErrorHandler } from './app/libs/globalErrorHandler';
-import { UserRoutes } from './app/modules/user/user.route';
-// import httpStatus from 'http-status';
+import router from './app/routes';
 const app = express();
 
 app.get('/api/v1', (req: Request, res: Response, next: NextFunction) => {
@@ -16,7 +15,7 @@ app.get('/api/v1', (req: Request, res: Response, next: NextFunction) => {
 });
 
 //user routes
-app.use('/api/v1', UserRoutes);
+app.use('/api/v1', router);
 
 //catch all routs
 app.use('*', notFound);
