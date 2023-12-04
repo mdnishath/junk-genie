@@ -7,7 +7,10 @@ import { Loader } from './loader.model';
 import mongoose from 'mongoose';
 
 //create new user
-const createUser = async (password: string, payload: ILoader) => {
+const createUser = async (
+  password: string,
+  payload: ILoader,
+): Promise<ILoader[]> => {
   const userData: Partial<IUser> = {};
 
   userData.password = password;
@@ -19,10 +22,10 @@ const createUser = async (password: string, payload: ILoader) => {
     if (!newUser.length) {
       throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create user');
     }
-    console.log(newUser);
 
     payload.user = newUser[0]._id; //referen
     const loader = await Loader.create([payload], { session });
+
     await session.commitTransaction();
     await session.endSession();
     return loader;
