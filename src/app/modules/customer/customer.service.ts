@@ -1,30 +1,35 @@
 import httpStatus from 'http-status';
 import { IUser } from '../user/user.interface';
 import { User } from '../user/user.model';
-import { ILoader } from './loader.interface';
+
 import AppError from '../../errors/AppError';
-import { Loader } from './loader.model';
+
 import mongoose from 'mongoose';
+import { ICustomer } from './customer.interface';
+import { Customer } from './customer.model';
 
 //create new user
-const createUser = async (
+const createCustomer = async (
   password: string,
-  payload: ILoader,
-): Promise<ILoader> => {
+  payload: ICustomer,
+): Promise<ICustomer> => {
   const userData: Partial<IUser> = {};
 
   userData.password = password;
-  userData.role = 'loader';
+  userData.role = 'customer';
+
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
     const newUser = await User.create([userData], { session }); // array
+    // console.log(newUser);
+
     if (!newUser.length) {
-      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create user');
+      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create customer');
     }
 
     payload.user = newUser[0]._id; //referen
-    const loader = await Loader.create([payload], { session });
+    const loader = await Customer.create([payload], { session });
 
     await session.commitTransaction();
     await session.endSession();
@@ -32,17 +37,17 @@ const createUser = async (
   } catch (error) {
     await session.abortTransaction();
     await session.endSession();
-    throw new Error('Failed to create student');
+    throw new Error('Failed to create customer');
   }
 };
 
 //get loaders
-const getLoaders = async (): Promise<ILoader[] | null> => {
-  const result = await Loader.find({}).populate('user');
+const getCustomers = async (): Promise<ICustomer[] | null> => {
+  const result = await Customer.find({}).populate('user');
   return result;
 };
 
-export const LoaderServices = {
-  createUser,
-  getLoaders,
+export const CustomerServices = {
+  createCustomer,
+  getCustomers,
 };

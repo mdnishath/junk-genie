@@ -1,14 +1,13 @@
 import { Query, Schema, model } from 'mongoose';
-import { IUser, TRole } from './user.interface';
+import { IUser } from './user.interface';
 import bcrypt from 'bcrypt';
 import { BYCRYPT_SOLT } from '../../config';
 
-const roles: TRole = 'loader' || 'admin' || 'user';
 const userSchema = new Schema<IUser>(
   {
     password: { type: String, required: true },
     needPasswordChange: { type: Boolean, default: true },
-    role: { type: String, enum: [roles], default: 'user' },
+    role: { type: String, enum: ['loader', 'admin', 'customer'] },
     isDeleted: { type: Boolean, default: false },
   },
   {

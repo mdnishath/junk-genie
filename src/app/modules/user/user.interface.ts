@@ -1,4 +1,4 @@
-export type TRole = 'loader' | 'admin' | 'user';
+export type TRole = 'loader' | 'admin' | 'customer';
 
 export interface IUser {
   password: string;
