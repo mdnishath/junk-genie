@@ -1,8 +1,8 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../libs/catchAsync';
+import catchAsync from '../../utils/catchAsync';
 import { DEFAULT_PASSWORD } from '../../config';
 import { LoaderServices } from './loader.service';
-import sendSuccessResponse from '../../libs/sendSuccessResponse';
+import sendSuccessResponse from '../../utils/sendSuccessResponse';
 
 // create user
 const createUser = catchAsync(async (req, res) => {

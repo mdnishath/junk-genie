@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
-import { notFound } from './app/libs/notFound';
-import { globalErrorHandler } from './app/libs/globalErrorHandler';
+import { notFound } from './app/middlewares/notFound';
+import { globalErrorHandler } from './app/middlewares/globalErrorHandler';
 import router from './app/routes';
 import cors from 'cors';
 const app = express();

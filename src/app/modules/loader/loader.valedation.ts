@@ -13,26 +13,30 @@ const addressValedationSchema = z.object({
   country: z.string(),
 });
 
-const createLoaderValedationSchemaSchema = z.object({
-  username: z.string(),
-  email: z.string(),
-  phone: z.string(),
-  name: nameValedationSchema,
-  gender: z.enum(['male', 'female']),
-  address: addressValedationSchema,
-  jobs: z.array(z.string()).optional(), // Assuming 'Job' is the name of the Job model
-  profileImage: z.string(),
+export const createLoaderValedationSchemaSchema = z.object({
+  body: z.object({
+    username: z.string(),
+    email: z.string(),
+    phone: z.string(),
+    name: nameValedationSchema,
+    gender: z.enum(['male', 'female']),
+    address: addressValedationSchema,
+    jobs: z.array(z.string()).optional(), // Assuming 'Job' is the name of the Job model
+    profileImage: z.string(),
+  }),
 });
 
-const updateLoaderValedationSchemaSchema = z.object({
-  username: z.string().optional(),
-  email: z.string().optional(),
-  phone: z.string().optional(),
-  name: nameValedationSchema.optional(),
-  gender: z.enum(['male', 'female']).optional(),
-  address: addressValedationSchema,
-  jobs: z.array(z.string()).optional(), // Assuming 'Job' is the name of the Job model
-  profileImage: z.string().optional(),
+export const updateLoaderValedationSchemaSchema = z.object({
+  body: z.object({
+    username: z.string().optional(),
+    email: z.string().optional(),
+    phone: z.string().optional(),
+    name: nameValedationSchema.optional(),
+    gender: z.enum(['male', 'female']).optional(),
+    address: addressValedationSchema,
+    jobs: z.array(z.string()).optional(), // Assuming 'Job' is the name of the Job model
+    profileImage: z.string().optional(),
+  }),
 });
 
 export const loaderValedationSchema = {

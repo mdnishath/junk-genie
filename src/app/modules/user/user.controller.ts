@@ -1,6 +1,6 @@
 import { UserServices } from './user.service';
 import httpStatus from 'http-status';
-import catchAsync from '../../libs/catchAsync';
+import catchAsync from '../../utils/catchAsync';
 import { DEFAULT_PASSWORD } from '../../config';
 
 // create user

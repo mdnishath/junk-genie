@@ -34,10 +34,10 @@ const createCustomer = async (
     await session.commitTransaction();
     await session.endSession();
     return loader[0];
-  } catch (error) {
+  } catch (error: any) {
     await session.abortTransaction();
     await session.endSession();
-    throw new Error('Failed to create customer');
+    throw new Error(error);
   }
 };
 

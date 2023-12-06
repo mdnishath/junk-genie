@@ -1,9 +1,10 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../libs/catchAsync';
+
 import { DEFAULT_PASSWORD } from '../../config';
 
-import sendSuccessResponse from '../../libs/sendSuccessResponse';
 import { CustomerServices } from './customer.service';
+import catchAsync from '../../utils/catchAsync';
+import sendSuccessResponse from '../../utils/sendSuccessResponse';
 
 // create user
 const createCustomer = catchAsync(async (req, res) => {
