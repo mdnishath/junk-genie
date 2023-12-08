@@ -1,10 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { IItem, IJob } from './job.interface';
-
-const itemSchema = new Schema<IItem>({
-  name: { type: String, required: true },
-  price: { type: Number, required: true },
-});
+import { IJob } from './job.interface';
 
 const jobSchema = new Schema<IJob>(
   {
@@ -12,7 +7,7 @@ const jobSchema = new Schema<IJob>(
     postalCode: { type: String, required: true },
     selectedService: { type: String, required: true },
     jobType: { type: String, required: true },
-    items: [itemSchema],
+    items: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
   },
   { timestamps: true },
 );
