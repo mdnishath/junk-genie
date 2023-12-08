@@ -56,6 +56,8 @@ export const globalErrorHandler: ErrorRequestHandler = (
         message: err?.message,
       },
     ];
+    // Log the detailed error for further investigation
+    console.error('AppError Details:', err);
   } else if (err instanceof Error) {
     message = err.message;
     errorSources = [
@@ -64,6 +66,8 @@ export const globalErrorHandler: ErrorRequestHandler = (
         message: err?.message,
       },
     ];
+    // Log the detailed error for further investigation
+    console.error('Generic Error Details:', err);
   }
 
   //ultimate return
