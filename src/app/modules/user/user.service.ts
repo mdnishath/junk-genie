@@ -10,10 +10,7 @@ import { ICustomer } from '../customer/customer.interface';
 
 //create new user
 //create new user
-const createLoader = async (
-  password: string,
-  payload: ILoader,
-): Promise<ILoader> => {
+const createLoader = async (password: string, payload: ILoader): Promise<ILoader> => {
   const userData: Partial<IUser> = {};
 
   userData.password = password;
@@ -23,7 +20,7 @@ const createLoader = async (
     session.startTransaction();
     const newUser = await User.create([userData], { session }); // array
     if (!newUser.length) {
-      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create user');
+      throw new AppError('Failed to create user', httpStatus.BAD_REQUEST);
     }
 
     payload.user = newUser[0]._id; //referen
@@ -40,10 +37,7 @@ const createLoader = async (
 };
 
 //create new user
-const createCustomer = async (
-  password: string,
-  payload: ICustomer,
-): Promise<ICustomer> => {
+const createCustomer = async (password: string, payload: ICustomer): Promise<ICustomer> => {
   const userData: Partial<IUser> = {};
 
   userData.password = password;
@@ -56,7 +50,7 @@ const createCustomer = async (
     // console.log(newUser);
 
     if (!newUser.length) {
-      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create customer');
+      throw new AppError('Failed to create customer', httpStatus.BAD_REQUEST);
     }
 
     payload.user = newUser[0]._id; //referen
@@ -72,7 +66,14 @@ const createCustomer = async (
   }
 };
 
+// get all users
+const getUsers = async (): Promise<IUser[] | null> => {
+  const users = await User.find();
+  return users;
+};
+
 export const UserServices = {
   createLoader,
   createCustomer,
+  getUsers,
 };

@@ -8,6 +8,7 @@ const userSchema = new Schema<IUser>(
     password: { type: String, required: true },
     needPasswordChange: { type: Boolean, default: true },
     role: { type: String, enum: ['loader', 'admin', 'customer'] },
+    status: { type: String, enum: ['in-progress', 'blocked'], default: 'in-progress' },
     isDeleted: { type: Boolean, default: false },
   },
   {
@@ -42,10 +43,7 @@ userSchema.pre('findOneAndUpdate', async function (this: any, next) {
   try {
     // console.log('Pre Middleware ===>', this._update);
     if (this._update.password) {
-      this._update.password = await bcrypt.hash(
-        this._update.password,
-        BYCRYPT_SOLT,
-      );
+      this._update.password = await bcrypt.hash(this._update.password, BYCRYPT_SOLT);
       next();
     }
     next();

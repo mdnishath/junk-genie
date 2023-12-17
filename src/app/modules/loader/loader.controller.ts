@@ -1,7 +1,8 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync';
+
 import { LoaderServices } from './loader.service';
-import sendSuccessResponse from '../../utils/sendSuccessResponse';
+import { catchAsync } from '../../utils/catchAsync';
+import { sendSuccessResponse } from '../../utils/sendSuccessResponse';
 
 // get all loaders
 const getLoaders = catchAsync(async (req, res) => {

@@ -1,6 +1,7 @@
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync';
+
 import { JobServices } from './job.service';
+import { catchAsync } from '../../utils/catchAsync';
 
 const createJob = catchAsync(async (req, res) => {
   const job = await req.body;

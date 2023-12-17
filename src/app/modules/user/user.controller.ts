@@ -1,8 +1,9 @@
 import { UserServices } from './user.service';
 import httpStatus from 'http-status';
-import catchAsync from '../../utils/catchAsync';
+
 import { DEFAULT_PASSWORD } from '../../config';
-import sendSuccessResponse from '../../utils/sendSuccessResponse';
+import { catchAsync } from '../../utils/catchAsync';
+import { sendSuccessResponse } from '../../utils/sendSuccessResponse';
 
 // create loader
 const createLoader = catchAsync(async (req, res) => {
@@ -44,7 +45,18 @@ const createCustomer = catchAsync(async (req, res) => {
   });
 });
 
+// get all users
+
+const getUsers = catchAsync(async (req, res) => {
+  const users = await UserServices.getUsers();
+  res.status(httpStatus.OK).json({
+    success: true,
+    message: 'Users retrieved successfully',
+    data: users,
+  });
+});
 export const UserControllers = {
   createLoader,
   createCustomer,
+  getUsers,
 };

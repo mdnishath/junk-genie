@@ -1,19 +1,16 @@
-import express, { NextFunction, Request, Response } from 'express';
-import { notFound } from './app/middlewares/notFound';
-import { globalErrorHandler } from './app/middlewares/globalErrorHandler';
-import router from './app/routes';
+import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-const app = express();
+import router from './app/routes';
+import globalErrorHandler from './middlewares/globalErrorHandler';
+const app: Application = express();
 
 //parse
 app.use(express.json());
 app.use(cors());
 
-app.get('/api/v1', (req: Request, res: Response, next: NextFunction) => {
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
   try {
-    res
-      .status(200)
-      .json({ success: true, message: 'Welcome to Junk Genie App api' });
+    res.status(200).json({ success: true, message: 'Welcome to Junk Genie api' });
   } catch (error) {
     next(error);
   }
@@ -21,9 +18,6 @@ app.get('/api/v1', (req: Request, res: Response, next: NextFunction) => {
 
 //user routes
 app.use('/api/v1', router);
-
-//catch all routs
-app.use('*', notFound);
 
 //global error handler
 app.use(globalErrorHandler);

@@ -1,8 +1,8 @@
 import httpStatus from 'http-status';
 
 import { CustomerServices } from './customer.service';
-import catchAsync from '../../utils/catchAsync';
-import sendSuccessResponse from '../../utils/sendSuccessResponse';
+import { catchAsync } from '../../utils/catchAsync';
+import { sendSuccessResponse } from '../../utils/sendSuccessResponse';
 
 // get all loaders
 const getCustomers = catchAsync(async (req, res) => {
