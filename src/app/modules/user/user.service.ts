@@ -30,8 +30,6 @@ const createAdmin = async (payload: TAdmin, password: string) => {
     await session.endSession();
     return newAdmin;
   } catch (error) {
-    console.log(error);
-
     await session.abortTransaction();
     await session.endSession();
     throw new AppError('Could not create admin', httpStatus.BAD_REQUEST);
