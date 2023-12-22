@@ -1,79 +1,43 @@
-import httpStatus from 'http-status';
-import AppError from '../../errors/AppError';
-import { Loader } from '../loader/loader.model';
-import { IUser } from './user.interface';
-import { User } from './user.model';
 import mongoose from 'mongoose';
-import { ILoader } from '../loader/loader.interface';
-import { Customer } from '../customer/customer.model';
-import { ICustomer } from '../customer/customer.interface';
+import { TAdmin } from '../admin/admin.interface';
+import { User } from './user.model';
+import AppError from '../../errors/AppError';
+import httpStatus from 'http-status';
+import { TUser } from './user.interface';
+import { DEFAULT_PASSWORD } from '../../config';
+import { USER_ROLE } from './user.constants';
+import { Admin } from '../admin/admin.model';
 
-//create new user
-//create new user
-const createLoader = async (password: string, payload: ILoader): Promise<ILoader> => {
-  const userData: Partial<IUser> = {};
-
-  userData.password = password;
-  userData.role = 'loader';
+// create admin service
+const createAdmin = async (payload: TAdmin, password: string) => {
+  const userData: Partial<TUser> = {};
+  userData.email = payload.email;
+  userData.password = password || DEFAULT_PASSWORD;
+  userData.role = USER_ROLE.admin;
+  //start session
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
-    const newUser = await User.create([userData], { session }); // array
+    const newUser = await User.create([userData], { session });
     if (!newUser.length) {
-      throw new AppError('Failed to create user', httpStatus.BAD_REQUEST);
+      throw new AppError('Could not create admin', httpStatus.BAD_REQUEST);
     }
+    // throw new Error('test transaction failed');
 
-    payload.user = newUser[0]._id; //referen
-    const loader = await Loader.create([payload], { session });
-
+    payload.user = newUser[0]._id;
+    const newAdmin = await Admin.create([payload], { session });
     await session.commitTransaction();
     await session.endSession();
-    return loader[0];
-  } catch (error: any) {
+    return newAdmin;
+  } catch (error) {
+    console.log(error);
+
     await session.abortTransaction();
     await session.endSession();
-    throw new Error(error);
+    throw new AppError('Could not create admin', httpStatus.BAD_REQUEST);
   }
-};
-
-//create new user
-const createCustomer = async (password: string, payload: ICustomer): Promise<ICustomer> => {
-  const userData: Partial<IUser> = {};
-
-  userData.password = password;
-  userData.role = 'customer';
-
-  const session = await mongoose.startSession();
-  try {
-    session.startTransaction();
-    const newUser = await User.create([userData], { session }); // array
-    // console.log(newUser);
-
-    if (!newUser.length) {
-      throw new AppError('Failed to create customer', httpStatus.BAD_REQUEST);
-    }
-
-    payload.user = newUser[0]._id; //referen
-    const loader = await Customer.create([payload], { session });
-
-    await session.commitTransaction();
-    await session.endSession();
-    return loader[0];
-  } catch (error: any) {
-    await session.abortTransaction();
-    await session.endSession();
-    throw new Error(error);
-  }
-};
-
-// get all users
-const getUsers = async (): Promise<IUser[] | null> => {
-  const users = await User.find();
-  return users;
 };
 
 export const UserServices = {
-  createLoader,
-  createCustomer,
-  getUsers,
+  createAdmin,
 };

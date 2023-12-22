@@ -1,9 +1,14 @@
-export type TRole = 'loader' | 'admin' | 'customer';
+import { USER_ROLE, UserStatus } from './user.constants';
 
-export interface IUser {
+export type UserRole = keyof typeof USER_ROLE;
+export type UserStatus = (typeof UserStatus)[number];
+
+export type TUser = {
+  email: string;
   password: string;
-  needPasswordChange: boolean;
-  role: TRole;
-  status: 'in-progress' | 'blocked';
+  needsPasswordChange: boolean;
+  passwordChangedAt?: Date;
+  role: UserRole;
+  status: UserStatus;
   isDeleted: boolean;
-}
+};

@@ -1,25 +1,25 @@
 import { Types } from 'mongoose';
-import { IJob } from '../jobs/job.interface';
+import { TJob } from '../job/job.interface';
 
-export interface IName {
+export type TName = {
   firstName: string;
   lastName: string;
-}
-export interface IAddress {
+};
+export type TAddress = {
   street: string;
   city: string;
   state: string;
   zip: string;
   country: string;
-}
-export interface ILoader {
+};
+export type TAdmin = {
   username: string;
   user: Types.ObjectId;
   email: string;
   phone: string;
-  name: IName;
+  name: TName;
   gender: 'male' | 'female';
-  address: IAddress;
-  jobs?: IJob[];
+  address: TAddress;
+  jobs?: TJob[];
   profileImage: string;
-}
+};
