@@ -1,12 +1,13 @@
 import express from 'express';
 import { UserControllers } from './user.controller';
 import { validateRequest } from '../../../middlewares/validateRequest';
-import { createAdminValidationSchema } from '../admin/admin.validation';
+import { createUserValidationSchema } from './user.validation';
+
 const router = express.Router();
 
 router.post(
   '/create-admin',
-  validateRequest(createAdminValidationSchema),
+  validateRequest(createUserValidationSchema),
   UserControllers.createAdmin,
 );
 

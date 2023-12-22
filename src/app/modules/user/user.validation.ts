@@ -13,9 +13,10 @@ export const addressValidationSchema = z.object({
   country: z.string(),
 });
 
-export const createAdminValidationSchema = z.object({
+export const createUserValidationSchema = z.object({
   username: z.string(),
   email: z.string().email(),
+  password: z.string().min(6),
   phone: z.string(),
   name: nameValidationSchema,
   gender: z.enum(['male', 'female']),

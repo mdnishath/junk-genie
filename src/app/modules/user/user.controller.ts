@@ -6,9 +6,8 @@ import { UserServices } from './user.service';
 
 const createAdmin = catchAsync(async (req, res) => {
   const payload = await req.body;
-  const { password } = await req.body;
   // call user service
-  const user = await UserServices.createAdmin(payload, password);
+  const user = await UserServices.createAdmin(payload);
   sendSuccessResponse(res, {
     statusCode: 201,
     message: 'Admin created successfully',
