@@ -1,6 +1,7 @@
 import express from 'express';
 import { UserRoutes } from '../modules/user/user.route';
 import { ItemRoutes } from '../modules/item/item.route';
+import { JobRoutes } from '../modules/job/job.route';
 
 const router = express.Router();
 
@@ -12,6 +13,10 @@ const allRouts = [
   {
     path: '/items',
     route: ItemRoutes,
+  },
+  {
+    path: '/jobs',
+    route: JobRoutes,
   },
 ];
 
