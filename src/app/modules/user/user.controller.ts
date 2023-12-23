@@ -7,10 +7,10 @@ import { UserServices } from './user.service';
 // create admin controller
 const createAdmin = catchAsync(async (req, res) => {
   const payload = await req.body;
-  // console.log(payload);
+  const { password } = await req.body;
 
   // call user service
-  const user = await UserServices.createAdmin(payload);
+  const user = await UserServices.createAdmin(payload, password);
   sendSuccessResponse(res, {
     statusCode: 201,
     message: 'Admin created successfully',
@@ -20,8 +20,10 @@ const createAdmin = catchAsync(async (req, res) => {
 // create loader controller
 const createLoader = catchAsync(async (req, res) => {
   const payload = await req.body;
+  const { password } = await req.body;
+
   // call user service
-  const user = await UserServices.createLoader(payload);
+  const user = await UserServices.createLoader(payload, password);
   sendSuccessResponse(res, {
     statusCode: 201,
     message: 'Loader created successfully',
@@ -31,13 +33,13 @@ const createLoader = catchAsync(async (req, res) => {
 // create admin controller
 const createCustomer = catchAsync(async (req, res) => {
   const payload = await req.body;
-  const { id } = req.params;
+  const { password } = await req.body;
 
   // call user service
-  const user = await UserServices.updateUser(id, payload);
+  const user = await UserServices.createCustomer(payload, password);
   sendSuccessResponse(res, {
     statusCode: 201,
-    message: 'Customer Updated successfully',
+    message: 'Customer created successfully',
     data: user,
   });
 });

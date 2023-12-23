@@ -27,7 +27,7 @@ export const errorProcess = (error: any): TErrorResponse => {
       issues: [
         {
           path: '',
-          message: error.message,
+          message: error?.message,
         },
       ],
     };

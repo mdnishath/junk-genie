@@ -1,23 +1,25 @@
 import express from 'express';
 import { UserControllers } from './user.controller';
 import { validateRequest } from '../../../middlewares/validateRequest';
-import { createUserValidationSchema } from './user.validation';
+import { createAdminValidationSchema } from '../admin/admin.validation';
+import { createLoaderValidationSchema } from '../loader/loader.validation';
+import { createCustomerValidationSchema } from '../customer/customer.validation';
 
 const router = express.Router();
 
 router.post(
   '/create-admin',
-  validateRequest(createUserValidationSchema),
+  validateRequest(createAdminValidationSchema),
   UserControllers.createAdmin,
 );
 router.post(
   '/create-loader',
-  validateRequest(createUserValidationSchema),
+  validateRequest(createLoaderValidationSchema),
   UserControllers.createLoader,
 );
 router.post(
   '/create-customer',
-  validateRequest(createUserValidationSchema),
+  validateRequest(createCustomerValidationSchema),
   UserControllers.createCustomer,
 );
 router.patch('/:id', UserControllers.createCustomer);
