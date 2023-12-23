@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Query, Schema, model } from 'mongoose';
 import { TJob } from './job.interface';
 
 const jobSchema = new Schema<TJob>({
@@ -29,6 +29,10 @@ const jobSchema = new Schema<TJob>({
     type: Boolean,
     default: false,
   },
+});
+jobSchema.pre(/^find/, function (this: Query<TJob, Document>, next) {
+  this.where({ isDeleted: false });
+  next();
 });
 
 export const Job = model<TJob>('Job', jobSchema);
