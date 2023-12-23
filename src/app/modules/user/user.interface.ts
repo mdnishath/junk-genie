@@ -2,7 +2,6 @@ import { USER_ROLE, UserStatus } from './user.constants';
 
 export type UserRole = keyof typeof USER_ROLE;
 export type UserStatus = (typeof UserStatus)[number];
-import { Types } from 'mongoose';
 import { TJob } from '../job/job.interface';
 
 export type TName = {
@@ -20,7 +19,6 @@ export type TAddress = {
 export type TUser = {
   username: string;
   password: string;
-  user: Types.ObjectId;
   email: string;
   phone: string;
   name: TName;

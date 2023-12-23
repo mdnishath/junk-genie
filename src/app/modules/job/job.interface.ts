@@ -6,4 +6,5 @@ export type TJob = {
   selectedService: string;
   jobType: string;
   items: Types.ObjectId[];
+  isDeleted: boolean;
 };

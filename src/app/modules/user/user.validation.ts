@@ -24,4 +24,13 @@ export const createUserValidationSchema = z.object({
   profileImage: z.string().url(),
 });
 
-export const updateUserValidationSchema = createUserValidationSchema.partial();
+export const updateUserValidationSchema = z.object({
+  username: z.string().optional(),
+  email: z.string().email().optional(),
+  password: z.string().min(6).optional(),
+  phone: z.string().optional(),
+  name: nameValidationSchema.optional(),
+  gender: z.enum(['male', 'female']).optional(),
+  address: addressValidationSchema.optional(),
+  profileImage: z.string().url().optional(),
+});

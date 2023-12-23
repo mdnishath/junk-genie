@@ -31,11 +31,13 @@ const createLoader = catchAsync(async (req, res) => {
 // create admin controller
 const createCustomer = catchAsync(async (req, res) => {
   const payload = await req.body;
+  const { id } = req.params;
+
   // call user service
-  const user = await UserServices.createCustomer(payload);
+  const user = await UserServices.updateUser(id, payload);
   sendSuccessResponse(res, {
     statusCode: 201,
-    message: 'Customer created successfully',
+    message: 'Customer Updated successfully',
     data: user,
   });
 });

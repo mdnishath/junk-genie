@@ -20,5 +20,5 @@ router.post(
   validateRequest(createUserValidationSchema),
   UserControllers.createCustomer,
 );
-
+router.patch('/:id', UserControllers.createCustomer);
 export const UserRoutes = router;
