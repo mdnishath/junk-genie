@@ -23,3 +23,5 @@ export const createUserValidationSchema = z.object({
   address: addressValidationSchema,
   profileImage: z.string().url(),
 });
+
+export const updateUserValidationSchema = createUserValidationSchema.partial();

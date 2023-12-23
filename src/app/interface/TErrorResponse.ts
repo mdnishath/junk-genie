@@ -2,7 +2,7 @@ export type TErrorResponse = {
   statusCode: number;
   status: 'error' | 'fail';
   message: string;
-  issues: TErrorIssue[];
+  issues?: TErrorIssue[];
 };
 export type TErrorIssue = {
   path: string | number;
