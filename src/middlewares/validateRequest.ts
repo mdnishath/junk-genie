@@ -4,6 +4,8 @@ import { catchAsync } from '../app/utils/catchAsync';
 
 export const validateRequest = (schema: ZodSchema) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.body);
+
     const result = await schema.safeParseAsync(req.body);
     if (!result.success) {
       next(result.error);

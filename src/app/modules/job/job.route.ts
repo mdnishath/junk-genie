@@ -2,6 +2,7 @@ import express from 'express';
 import { JobControllers } from './job.controller';
 import { validateRequest } from '../../../middlewares/validateRequest';
 import { createJobValidationSchema } from './job.validation';
+
 const router = express.Router();
 
 router.post('/create-job', validateRequest(createJobValidationSchema), JobControllers.createJob);

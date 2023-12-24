@@ -5,6 +5,8 @@ import { JobServices } from './job.service';
 // create job
 const createJob = catchAsync(async (req, res) => {
   const payload = await req.body;
+  console.log(payload);
+
   // call job service
   const result = await JobServices.createJob(payload);
   sendSuccessResponse(res, {
@@ -38,6 +40,7 @@ const getJobs = catchAsync(async (req, res) => {
 const updateJob = catchAsync(async (req, res) => {
   const { id } = req.params;
   const payload = await req.body;
+
   // call job service
   const result = await JobServices.updateJob(id, payload);
   sendSuccessResponse(res, {
